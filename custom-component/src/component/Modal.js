@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 const Modal = () => {
   const [isShow, setIsShow] = useState(false);
+  const modal = useRef(null);
 
   const showModal = () => {
     setIsShow(true);
@@ -9,6 +10,12 @@ const Modal = () => {
 
   const hideModal = () => {
     setIsShow(false);
+  };
+
+  const closeModal = (e) => {
+    if (!modal.current.contains(e.target)) {
+      hideModal();
+    }
   };
 
   return (
@@ -19,27 +26,31 @@ const Modal = () => {
       >
         Open Modal
       </button>
-      <div
-        className={`${
-          isShow ? '' : 'hidden'
-        } absolute w-full h-full bg-gray-400 bg-opacity-70`}
-      >
-        <div className='absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-white w-72 h-32 rounded-xl'>
-          <div className='mt-1 flex justify-center'>
-            <button
-              className='cursor-pointer font-bold text-center'
-              onClick={hideModal}
-            >
-              X
-            </button>
-          </div>
-          <div className='h-20 flex items-center justify-center'>
-            <div className='text-center font-semibold text-violet-700 text-xl'>
-              HELLO CODESTATES!
+      {isShow ? (
+        <div
+          onClick={closeModal}
+          className='absolute w-full h-full bg-gray-400 bg-opacity-70'
+        >
+          <div
+            ref={modal}
+            className='absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-white w-72 h-32 rounded-xl'
+          >
+            <div className='mt-1 flex justify-center'>
+              <button
+                className='cursor-pointer font-bold text-center'
+                onClick={hideModal}
+              >
+                X
+              </button>
+            </div>
+            <div className='h-20 flex items-center justify-center'>
+              <div className='text-center font-semibold text-violet-700 text-xl'>
+                HELLO CODESTATES!
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };
