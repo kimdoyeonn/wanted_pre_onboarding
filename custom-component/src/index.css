@@ -22,6 +22,27 @@
   .select {
     @apply bg-violet-700 text-white transition-colors shadow-inner;
   }
+
+  .edit-container {
+    @apply flex items-center justify-center mb-10;
+  }
+
+  .edit-container:first-child {
+    @apply mb-5;
+  }
+
+  .edit-container span:first-child {
+    @apply mr-4;
+  }
+
+  .edit-container span:nth-child(2),
+  .edit-container input {
+    @apply w-44 h-12 border-2 border-gray-400 text-center leading-10;
+  }
+
+  .edit-container input {
+    @apply outline-none focus:border-violet-500;
+  }
 }
 
 body {
