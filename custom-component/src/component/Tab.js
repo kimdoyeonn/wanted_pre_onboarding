@@ -17,6 +17,7 @@ const Tab = () => {
       <div className='w-11/12 h-12 ml-16 bg-zinc-200 flex'>
         {contents.map((con, idx) => (
           <div
+            key={idx}
             className={`tab ${select === idx ? 'select' : ''}`}
             onClick={() => {
               handleTab(idx);
