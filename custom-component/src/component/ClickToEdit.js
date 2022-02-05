@@ -61,7 +61,7 @@ const ClickToEdit = () => {
         />
         <EditForm type='나이' value={age} setValue={(value) => setAge(value)} />
       </div>
-      <div className=''>
+      <div>
         <span>이름 {name}</span> <span>나이 {age}</span>
       </div>
     </div>

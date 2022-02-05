@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 
 const Tag = () => {
-  const [text, setText] = useState('');
   const [tagList, setTagList] = useState([]);
 
-  const changeText = (e) => {
-    setText(e.target.value);
-  };
-
-  const addTag = () => {
+  const addTag = (e) => {
+    const text = e.target.value;
     if (text !== '' && !tagList.includes(text)) {
       setTagList([...tagList, text]);
-      setText('');
+      e.target.value = '';
     }
   };
 
@@ -43,11 +39,9 @@ const Tag = () => {
         <input
           type='text'
           placeholder='Press enter to add tags'
-          value={text}
-          onChange={changeText}
           onKeyUp={(e) => {
             if (e.key === 'Enter') {
-              addTag();
+              addTag(e);
             }
           }}
           className='outline-none h-9 ml-1 my-1 flex-grow'
