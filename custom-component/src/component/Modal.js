@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-const Modal = () => {
+const Modal = ({ openerMessage = '', modalMessage = '' }) => {
   const [isShow, setIsShow] = useState(false);
   const modal = useRef(null);
 
@@ -18,13 +18,15 @@ const Modal = () => {
     }
   };
 
+  if (!openerMessage || !modalMessage) return <></>;
+
   return (
     <div className='w-full h-full relative flex justify-center items-center'>
       <button
         className='h-16 w-36 font-bold shadow-inner rounded-full text-white bg-violet-800'
         onClick={showModal}
       >
-        Open Modal
+        {openerMessage}
       </button>
       {isShow ? (
         <div
@@ -45,7 +47,7 @@ const Modal = () => {
             </div>
             <div className='h-20 flex items-center justify-center'>
               <div className='text-center font-semibold text-violet-700 text-xl'>
-                HELLO CODESTATES!
+                {modalMessage}
               </div>
             </div>
           </div>
