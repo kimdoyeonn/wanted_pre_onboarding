@@ -6,20 +6,35 @@ import Tab from './component/Tab';
 import Tag from './component/Tag';
 import Toggle from './component/Toggle';
 
+const autoCompleteData = [
+  'antique',
+  'refurbished',
+  'vintage',
+  'rustic',
+  '중고A급',
+  '중고B급',
+];
+
+const tabData = [
+  { name: 'Tab1', details: 'Tab menu ONE' },
+  { name: 'Tab2', details: 'Tab menu TWO' },
+  { name: 'Tab3', details: 'Tab menu THREE' },
+];
+
 function App() {
   return (
     <div className='App'>
       <section className='container'>
         <div className='title'>Toggle</div>
-        <Toggle />
+        <Toggle checked disable />
       </section>
       <section className='container'>
         <div className='title'>Modal</div>
-        <Modal />
+        <Modal openerMessage='Open Modal' modalMessage='HELLO CODESTATES!' />
       </section>
       <section className='container'>
         <div className='title'>Tab</div>
-        <Tab />
+        <Tab contents={tabData} />
       </section>
       <section className='container'>
         <div className='title'>Tag</div>
@@ -27,7 +42,7 @@ function App() {
       </section>
       <section className='container'>
         <div className='title'>AutoComplete</div>
-        <AutoComplete />
+        <AutoComplete data={autoCompleteData} />
       </section>
       <section className='container'>
         <div className='title'>ClickToEdit</div>

@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const data = [
-  'antique',
-  'refurbished',
-  'vintage',
-  'rustic',
-  '중고A급',
-  '중고B급',
-];
-
-const AutoComplete = () => {
+const AutoComplete = ({ data = [] }) => {
   const [isShow, setIsShow] = useState(false);
   const [text, setText] = useState('');
   const [wordList, setWordList] = useState([]);
@@ -28,7 +19,7 @@ const AutoComplete = () => {
       setIsShow(true);
       searchWord();
     }
-  }, [text]);
+  }, [text, data]);
 
   const changeText = (e) => {
     setText(e.target.value);

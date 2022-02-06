@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 
-const Tab = () => {
+const Tab = ({ contents = [] }) => {
   const [select, setSelect] = useState(0);
-  const contents = [
-    { name: 'Tab1', message: 'Tab menu ONE' },
-    { name: 'Tab2', message: 'Tab menu TWO' },
-    { name: 'Tab3', message: 'Tab menu THREE' },
-  ];
 
   const handleTab = (idx) => {
     setSelect(idx);
@@ -28,7 +23,7 @@ const Tab = () => {
         ))}
       </div>
       <div className='h-60 w-full font-semibold text-2xl flex justify-center items-center'>
-        <div>{contents[select].message}</div>
+        <div>{contents[select].details}</div>
       </div>
     </div>
   );
