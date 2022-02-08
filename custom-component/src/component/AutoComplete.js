@@ -4,6 +4,7 @@ const AutoComplete = ({ data = [] }) => {
   const [isShow, setIsShow] = useState(false);
   const [text, setText] = useState('');
   const [wordList, setWordList] = useState([]);
+  const [selectItem, setSelectItem] = useState(-1);
 
   useEffect(() => {
     const searchWord = () => {
@@ -12,6 +13,7 @@ const AutoComplete = ({ data = [] }) => {
           word.includes(text.toUpperCase()) || word.includes(text.toLowerCase())
       );
       setWordList(words);
+      setSelectItem(-1);
     };
     if (text === '') {
       setIsShow(false);
@@ -23,6 +25,18 @@ const AutoComplete = ({ data = [] }) => {
 
   const changeText = (e) => {
     setText(e.target.value);
+  };
+
+  const handleUpDown = (e) => {
+    let nextItem = selectItem;
+    if (e.key === 'ArrowDown') {
+      nextItem = (nextItem + 1) % wordList.length;
+    } else if (e.key === 'ArrowUp') {
+      nextItem = nextItem < 0 ? wordList.length : nextItem;
+      nextItem = (nextItem - 1) % wordList.length;
+      nextItem = nextItem === -1 ? wordList.length - 1 : nextItem;
+    }
+    setSelectItem(nextItem);
   };
 
   return (
@@ -38,6 +52,13 @@ const AutoComplete = ({ data = [] }) => {
             className='flex flex-grow outline-none'
             value={text}
             onChange={changeText}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                setText(wordList[selectItem]);
+              } else {
+                handleUpDown(e);
+              }
+            }}
           />
           <span
             className='font-semibold cursor-pointer'
@@ -52,7 +73,9 @@ const AutoComplete = ({ data = [] }) => {
               {wordList.map((word, idx) => (
                 <li
                   key={idx}
-                  className='px-3 my-2 hover:bg-neutral-200'
+                  className={`px-3 my-2 hover:bg-neutral-200 ${
+                    idx === selectItem ? 'bg-neutral-200' : ''
+                  }`}
                   onClick={() => setText(word)}
                 >
                   {word}
