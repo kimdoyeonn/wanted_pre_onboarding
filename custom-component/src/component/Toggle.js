@@ -4,6 +4,9 @@ const Toggle = ({ checked, disable }) => {
   const [toggle, setToggle] = useState(checked);
 
   const handleToggle = () => {
+    if (disable) {
+      return;
+    }
     setToggle(!toggle);
   };
 
